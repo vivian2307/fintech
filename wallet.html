@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Book &amp; Go</title>
+    <!-- Import Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Import Font Awesome cho icon -->
+    <!-- <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/0af0d96f18.js" crossorigin="anonymous"></script>
+    <style>
+        /* ================== RESET & FONT ================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f2f4f7;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: url("keghan-crossland-ZZxmc66SjfM-unsplash.jpg");
+            background-size: contain;
+            background-position: center;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================== HEADER ================== */
+        .site-header {
+            width: 100%;
+            background-color: #D3D3D3;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            font-family: 'Playfair Display', serif; /* Chuyển font header thành Playfair Display */
+            font-weight: 700;
+        }
+        .site-header .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+        /* Nav trái */
+        .nav-left {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-left a {
+            font-weight: 1200;
+            font-size: 1rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+            color: black;
+        }
+        .nav-left a:hover {
+            background: #e9ecef;
+            color: #007bff;
+        }
+        /* Nav phải */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .nav-right .user-icon,
+        .nav-right .notification-icon {
+            font-size: 1.3rem;
+            color: #495057;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-right .user-icon:hover,
+        .nav-right .notification-icon:hover {
+            color: #007bff;
+        }
+        .wallet {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fa;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            font-family: 'Poppins', sans-serif;
+
+        }
+        .wallet i {
+            color: #e67e22;
+            font-size: 1.1rem;
+            
+        }
+        .my-qr-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #D3D3D3;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .my-qr-btn i {
+            font-size: 1rem;
+        }
+        .my-qr-btn:hover {
+            background: #0069d9;
+        }
+        .notification-icon {
+            position: relative;
+        }
+        .notification-icon .badge {
+            position: absolute;
+            top: -4px;
+            right: -8px;
+            width: 8px;
+            height: 8px;
+            background: #dc3545;
+            border-radius: 50%;
+        }
+
+        /* ================== NỘI DUNG ================== */
+        .container {
+            display: flex;
+            gap: 24px;
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        /* -------- CỘT TRÁI -------- */
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* ---- BẢN ĐỒ BÀN ---- */
+        .table-map {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            width: 700px;
+        }
+        .table-map h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .zone {
+            margin-bottom: 24px;
+        }
+        .zone h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #34495e;
+        }
+        /* Lưới bàn: 5 cột cho 10 bàn (2 hàng) */
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        .table-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .table-box:hover:not(.inactive) {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        .table-box.available {
+            background: #28a745;
+        }
+        .table-box.booked {
+            background: #dc3545;
+        }
+        .table-box.inactive {
+            background: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+        /* Legend (nếu muốn) */
+        .legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        .legend-color.available { background: #28a745; }
+        .legend-color.booked    { background: #dc3545; }
+        .legend-color.inactive  { background: #6c757d; }
+
+        /* ---- MENU ---- */
+        .menu {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            width: 700px;
+        }
+        .menu h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 24px;
+        }
+        .menu-item {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .menu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+        .menu-item img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+        .menu-item .info {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .menu-item .info h4 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        .menu-item .info .price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e67e22;
+            margin-bottom: 12px;
+        }
+        .menu-item .info button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .menu-item .info button:hover {
+            background: #0069d9;
+        }
+
+        /* -------- CỘT PHẢI -------- */
+        .right-panel {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            height: fit-content;
+        }
+        .cart-summary {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-summary h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .cart-table thead th {
+            padding: 12px;
+            background: #f0f0f0;
+            font-weight: 600;
+            color: #34495e;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        .cart-table tbody tr:nth-child(odd) {
+            background: #fafafa;
+        }
+        .cart-table th,
+        .cart-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+        .cart-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .reserve-btn {
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: #28a745;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .reserve-btn:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        .reserve-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        /* Căn chỉnh và thu nhỏ logo */
+        .logo {
+            width: 48px;       /* hoặc bất cứ kích thước nào bạn muốn */
+            height: auto;      /* giữ tỉ lệ gốc */
+            object-fit: contain;
+            margin-right: 16px; /* khoảng cách giữa logo và menu */
+        }
+
+        /* Đảm bảo .header-container dùng flex để căn logo và menu */
+        .site-header .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ======== RESPONSIVE ======== */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            .right-panel {
+                width: 100%;
+            }
+        }
+
+    /* ====== FOOTER ====== */
+    footer {
+    background: #ffffff;           /* Nền trắng cho footer, không thấy background body */
+    padding: 0;                    /* Xóa padding mặc định */
+    margin: 0;                     /* Xóa margin mặc định */
+    }
+
+    footer .below-menu {
+    width: 100%;                   /* Chiếm hết chiều ngang của viewport */
+    box-shadow: none;              /* Nếu không muốn đổ bóng nữa, hoặc bạn có thể giữ */
+    border-radius: 0;              /* Nếu không cần bo góc, hoặc để 0 */
+    padding: 0;                    /* Xóa padding, vì hình sẽ phủ full */
+    margin: 0;                     /* Xóa margin, để sát cạnh trên của footer */
+    text-align: center;
+    }
+
+    /* Tiêu đề trong footer, nếu muốn giữ như cũ */
+    footer .below-menu h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;                /* Khoảng cách trên dưới so với hình */
+    }
+
+    /* Kích thước cờ */
+    footer .below-menu h2 .flag {
+    width: 32px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    }
+
+    /* Ảnh minh họa trong footer */
+    footer .below-menu .below-image {
+    width: 100%;                   /* Chiếm toàn bộ chiều ngang */
+    height: auto;                  /* Giữ tỉ lệ gốc */
+    display: block;
+    }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+        <div class="header-container">
+            <img src="logo.jpg" alt="Logo" class="logo">
+            <!-- Menu bên trái -->
+            <nav class="nav-left">
+                <a href="#">TRANG CHỦ</a>
+                <a href="#">VÉ ĐẶT CHỖ </a>
+                <a href="#">MENU</a>
+            </nav>
+
+            <!-- Phần bên phải -->
+            <div class="nav-right">
+                <!-- Icon người dùng -->
+                <i class="fas fa-user-circle user-icon" title="Tài khoản"></i>
+
+                <!-- Wallet -->
+                <div class="wallet">
+                    <i class="fas fa-wallet"></i>
+                    <span>182 500 ₫</span>
+                </div>
+
+                <!-- My QR -->
+                <button class="my-qr-btn">
+                    <i class="fas fa-qrcode"></i>
+                    <span>My QR</span>
+                </button>
+
+                <!-- Notification bell -->
+                <div class="notification-icon" title="Thông báo">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="badge"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+    <!-- Phần Wallet (Ví của tôi) -->
+    <div style="background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); max-width: 800px; margin: 20px auto; padding: 20px;">
+        <div style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color: #333; text-align: center;">
+            Ví của tôi
+        </div>
+        
+        <div style="font-size: 28px; font-weight: bold; color: #2e7d32; text-align: center; margin: 10px 0;">
+            500.000 VND
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin: 15px 0; justify-content: center;">
+            <button style="padding: 10px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; background: #2e7d32; color: white;">
+                Nạp tiền
+            </button>
+            <button style="padding: 10px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; background: #f0f0f0; color: #333;">
+                Rút tiền
+            </button>
+        </div>
+        
+        <div style="font-size: 16px; font-weight: bold; margin: 20px 0 10px; color: #555;">
+            Lịch sử giao dịch
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+            <span style="color: #777; font-size: 14px;">11/06/2025 14:30</span>
+            <span style="flex: 1; margin-left: 10px;">Đặt chỗ bàn A1</span>
+            <span style="font-weight: bold; color: #d32f2f;">-50.000 VND</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+            <span style="color: #777; font-size: 14px;">10/06/2025 09:15</span>
+            <span style="flex: 1; margin-left: 10px;">Mua đồ uống</span>
+            <span style="font-weight: bold; color: #d32f2f;">-30.000 VND</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+            <span style="color: #777; font-size: 14px;">09/06/2025 16:45</span>
+            <span style="flex: 1; margin-left: 10px;">Nạp tiền</span>
+            <span style="font-weight: bold; color: #2e7d32;">+200.000 VND</span>
+        </div>
+        
+        <div style="font-size: 16px; font-weight: bold; margin: 20px 0 10px; color: #555;">
+            Thống kê chi tiêu
+        </div>
+        <div style="background: #f9f9f9; height: 120px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 10px 0; color: #999;">
+            Biểu đồ chi tiêu theo tuần/tháng
+        </div>
+        <div style="margin: 10px 0;">
+            <span>Tổng chi tiêu tuần: <strong>80.000 VND</strong></span><br>
+            <span>So với tuần trước: <strong style="color: #2e7d32;">-20%</strong></span>
+        </div>
+        
+        <div style="font-size: 16px; font-weight: bold; margin: 20px 0 10px; color: #555;">
+            Gợi ý tiết kiệm & ưu đãi
+        </div>
+        <div style="background: #f5f5f5; padding: 10px; border-radius: 8px; margin: 10px 0; font-size: 14px;">
+            - Mua gói tuần, tiết kiệm 10%<br>
+            - Voucher giảm 20k cho lần đặt chỗ tiếp theo
+        </div>
+    </div>
+</div>

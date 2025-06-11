@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Book &amp; Go</title>
+    <!-- Import Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Import Font Awesome cho icon -->
+    <!-- <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/0af0d96f18.js" crossorigin="anonymous"></script>
+    <style>
+        /* ================== RESET & FONT ================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f2f4f7;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: url("keghan-crossland-ZZxmc66SjfM-unsplash.jpg");
+            background-size: contain;
+            background-position: center;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================== HEADER ================== */
+        .site-header {
+            width: 100%;
+            background-color: #D3D3D3;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            font-family: 'Playfair Display', serif; /* Chuyển font header thành Playfair Display */
+            font-weight: 700;
+        }
+        .site-header .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+        /* Nav trái */
+        .nav-left {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-left a {
+            font-weight: 1200;
+            font-size: 1rem;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+            color: black;
+        }
+        .nav-left a:hover {
+            background: #e9ecef;
+            color: #007bff;
+        }
+        /* Nav phải */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .nav-right .user-icon,
+        .nav-right .notification-icon {
+            font-size: 1.3rem;
+            color: #495057;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-right .user-icon:hover,
+        .nav-right .notification-icon:hover {
+            color: #007bff;
+        }
+        .wallet {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fa;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #495057;
+            border: 1px solid #dee2e6;
+            font-family: 'Poppins', sans-serif;
+
+        }
+        .wallet i {
+            color: #e67e22;
+            font-size: 1.1rem;
+            
+        }
+        .my-qr-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #D3D3D3;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .my-qr-btn i {
+            font-size: 1rem;
+        }
+        .my-qr-btn:hover {
+            background: #0069d9;
+        }
+        .notification-icon {
+            position: relative;
+        }
+        .notification-icon .badge {
+            position: absolute;
+            top: -4px;
+            right: -8px;
+            width: 8px;
+            height: 8px;
+            background: #dc3545;
+            border-radius: 50%;
+        }
+
+        /* ================== NỘI DUNG ================== */
+        .container {
+            display: flex;
+            gap: 24px;
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        /* -------- CỘT TRÁI -------- */
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* ---- BẢN ĐỒ BÀN ---- */
+        .table-map {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            width: 700px;
+        }
+        .table-map h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .zone {
+            margin-bottom: 24px;
+        }
+        .zone h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #34495e;
+        }
+        /* Lưới bàn: 5 cột cho 10 bàn (2 hàng) */
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+        .table-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .table-box:hover:not(.inactive) {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        .table-box.available {
+            background: #28a745;
+        }
+        .table-box.booked {
+            background: #dc3545;
+        }
+        .table-box.inactive {
+            background: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+        /* Legend (nếu muốn) */
+        .legend {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        .legend-color.available { background: #28a745; }
+        .legend-color.booked    { background: #dc3545; }
+        .legend-color.inactive  { background: #6c757d; }
+
+        /* ---- MENU ---- */
+        .menu {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            width: 700px;
+        }
+        .menu h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 24px;
+        }
+        .menu-item {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .menu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+        .menu-item img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+        .menu-item .info {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .menu-item .info h4 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        .menu-item .info .price {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e67e22;
+            margin-bottom: 12px;
+        }
+        .menu-item .info button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .menu-item .info button:hover {
+            background: #0069d9;
+        }
+
+        /* -------- CỘT PHẢI -------- */
+        .right-panel {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            height: fit-content;
+        }
+        .cart-summary {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-summary h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .cart-table thead th {
+            padding: 12px;
+            background: #f0f0f0;
+            font-weight: 600;
+            color: #34495e;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+        .cart-table tbody tr:nth-child(odd) {
+            background: #fafafa;
+        }
+        .cart-table th,
+        .cart-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+        .cart-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .reserve-btn {
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: #28a745;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .reserve-btn:hover:not(:disabled) {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        .reserve-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        /* Căn chỉnh và thu nhỏ logo */
+        .logo {
+            width: 48px;       /* hoặc bất cứ kích thước nào bạn muốn */
+            height: auto;      /* giữ tỉ lệ gốc */
+            object-fit: contain;
+            margin-right: 16px; /* khoảng cách giữa logo và menu */
+        }
+
+        /* Đảm bảo .header-container dùng flex để căn logo và menu */
+        .site-header .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ======== RESPONSIVE ======== */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            .right-panel {
+                width: 100%;
+            }
+        }
+
+    /* ====== FOOTER ====== */
+    footer {
+    background: #ffffff;           /* Nền trắng cho footer, không thấy background body */
+    padding: 0;                    /* Xóa padding mặc định */
+    margin: 0;                     /* Xóa margin mặc định */
+    }
+
+    footer .below-menu {
+    width: 100%;                   /* Chiếm hết chiều ngang của viewport */
+    box-shadow: none;              /* Nếu không muốn đổ bóng nữa, hoặc bạn có thể giữ */
+    border-radius: 0;              /* Nếu không cần bo góc, hoặc để 0 */
+    padding: 0;                    /* Xóa padding, vì hình sẽ phủ full */
+    margin: 0;                     /* Xóa margin, để sát cạnh trên của footer */
+    text-align: center;
+    }
+
+    /* Tiêu đề trong footer, nếu muốn giữ như cũ */
+    footer .below-menu h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #2c3e50;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;                /* Khoảng cách trên dưới so với hình */
+    }
+
+    /* Kích thước cờ */
+    footer .below-menu h2 .flag {
+    width: 32px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    }
+
+    /* Ảnh minh họa trong footer */
+    footer .below-menu .below-image {
+    width: 100%;                   /* Chiếm toàn bộ chiều ngang */
+    height: auto;                  /* Giữ tỉ lệ gốc */
+    display: block;
+    }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+        <div class="header-container">
+            <img src="logo.jpg" alt="Logo" class="logo">
+            <!-- Menu bên trái -->
+            <nav class="nav-left">
+                <a href="#">TRANG CHỦ</a>
+                <a href="#">VÉ ĐẶT CHỖ </a>
+                <a href="#">MENU</a>
+            </nav>
+
+            <!-- Phần bên phải -->
+            <div class="nav-right">
+                <!-- Icon người dùng -->
+                <i class="fas fa-user-circle user-icon" title="Tài khoản"></i>
+
+                <!-- Wallet -->
+                <div class="wallet">
+                    <i class="fas fa-wallet"></i>
+                    <span>182 500 ₫</span>
+                </div>
+
+                <!-- My QR -->
+                <button class="my-qr-btn">
+                    <i class="fas fa-qrcode"></i>
+                    <span>My QR</span>
+                </button>
+
+                <!-- Notification bell -->
+                <div class="notification-icon" title="Thông báo">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="badge"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== NỘI DUNG CHÍNH ===== -->
+    <div class="container">
+        <!-- ===== CỘT TRÁI: TABLE MAP + MENU ===== -->
+        <div class="left-panel">
+            <!-- --- Phần bản đồ bàn --- -->
+            <div class="table-map">
+                <h2>Bản đồ bàn</h2>
+
+                <!-- Khu A1 -->
+                <div class="zone">
+                    <h3>Khu A1</h3>
+                    <div class="tables-grid">
+                        <div class="table-box available">1</div>
+                        <div class="table-box booked">2</div>
+                        <div class="table-box available">3</div>
+                        <div class="table-box inactive">4</div>
+                        <div class="table-box available">5</div>
+                        <div class="table-box booked">6</div>
+                        <div class="table-box available">7</div>
+                        <div class="table-box available">8</div>
+                        <div class="table-box booked">9</div>
+                        <div class="table-box inactive">10</div>
+                    </div>
+                </div>
+
+                <!-- Khu A2 -->
+                <div class="zone">
+                    <h3>Khu A2</h3>
+                    <div class="tables-grid">
+                        <div class="table-box booked">1</div>
+                        <div class="table-box available">2</div>
+                        <div class="table-box inactive">3</div>
+                        <div class="table-box available">4</div>
+                        <div class="table-box booked">5</div>
+                        <div class="table-box available">6</div>
+                        <div class="table-box available">7</div>
+                        <div class="table-box booked">8</div>
+                        <div class="table-box available">9</div>
+                        <div class="table-box inactive">10</div>
+                    </div>
+                </div>
+
+                <!-- Khu A3 -->
+                <div class="zone">
+                    <h3>Khu A3</h3>
+                    <div class="tables-grid">
+                        <div class="table-box inactive">1</div>
+                        <div class="table-box available">2</div>
+                        <div class="table-box available">3</div>
+                        <div class="table-box booked">4</div>
+                        <div class="table-box available">5</div>
+                        <div class="table-box booked">6</div>
+                        <div class="table-box available">7</div>
+                        <div class="table-box inactive">8</div>
+                        <div class="table-box available">9</div>
+                        <div class="table-box booked">10</div>
+                    </div>
+                </div>
+
+                <!-- Nếu muốn legend -->
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color available"></div>
+                        <span>Trống</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color booked"></div>
+                        <span>Đã đặt</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color inactive"></div>
+                        <span>Không hoạt động</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --- Phần Menu --- -->
+            <div class="menu">
+                <h2>Menu</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <img src="image.png" alt="Cappuchino">
+                        <div class="info">
+                            <h4>Cappuchino</h4>
+                            <div class="price">₫35 000</div>
+                            <button type="button">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <img src="7e8b2b5b-71c6-427a-8b82-6fff701378c0.jpg" alt="Matcha Latte">
+                        <div class="info">
+                            <h4>Matcha Latte</h4>
+                            <div class="price">₫40 000</div>
+                            <button type="button">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <img src="11291a85-659b-4733-8b55-fb84c28a46fe.jpg" alt="Trà sữa">
+                        <div class="info">
+                            <h4>Trà sữa</h4>
+                            <div class="price">₫40 000</div>
+                            <button type="button">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <img src="228627c4-7b29-44ca-9f5f-b1cc2688891f.jpg" alt="Trà đào">
+                        <div class="info">
+                            <h4>Trà đào</h4>
+                            <div class="price">₫40 000</div>
+                            <button type="button">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <img src="a135df2d-5dd7-45e0-ba8d-a399f65537c7.jpg" alt="Chocolate sữa">
+                        <div class="info">
+                            <h4>Chocolate sữa</h4>
+                            <div class="price">₫50 000</div>
+                            <button type="button">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <img src="12766a25-b9fb-42f5-8d61-d36ab1f7be35.jpg" alt="Cookies đá xay">
+                        <div class="info">
+                            <h4>Cookies đá xay</h4>
+                            <div class="price">₫55 000</div>
+                            <button type="button">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CỘT PHẢI: CART SUMMARY ===== -->
+        <div class="right-panel">
+            <div class="cart-summary">
+                <h2>Cart Summary</h2>
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Món</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                            <th>Tổng cộng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Món Ăn 1</td>
+                            <td>2</td>
+                            <td>₫50 000</td>
+                            <td>₫100 000</td>
+                        </tr>
+                        <tr>
+                            <td>Món Ăn 3</td>
+                            <td>1</td>
+                            <td>₫60 000</td>
+                            <td>₫60 000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="reserve-btn" type="button" disabled>Chọn Bàn → Đặt Cọc 20%</button>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+<footer>
+        <div class="below-menu">
+        <h2>
+            <img src="la-co-viet-nam-dongphusongphu2.png" alt="Cờ Việt Nam" class="flag">
+            VỤ MÙA CÀ PHÊ VIỆT NAM 2025
+        </h2>
+        <img src="background.jpg" alt="Ảnh minh họa" class="below-image">
+    </div>
+</footer>
+</html>
